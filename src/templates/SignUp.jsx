@@ -1,5 +1,5 @@
 import React, {useCallback, useState} from 'react';
-import {TextInput} from "../components/UIkit/TextInput";
+import {TextInput} from "../components/UIkit";
 
 const SignUp = () => {
 
