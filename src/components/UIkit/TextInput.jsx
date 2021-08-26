@@ -1,6 +1,5 @@
 import React from 'react';
-import Textfield from "@material-ui/core/TextField"
-
+import TextField from "@material-ui/core/TextField";
 
 const TextInput = (props) => {
   return (
