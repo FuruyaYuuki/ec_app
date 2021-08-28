@@ -1,8 +1,8 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { getUserId } from '../reducks/users/selectors';
-import { getUsername } from '../reducks/users/selectors';
-import { signOut } from '../reducks/users/operations';
+import {useDispatch, useSelector} from 'react-redux';
+import {getUserId} from '../reducks/users/selectors';
+import {getUsername} from '../reducks/users/selectors';
+import {signOut} from '../reducks/users/operations';
 
 const Home = () => {
   const dispatch = useDispatch()
