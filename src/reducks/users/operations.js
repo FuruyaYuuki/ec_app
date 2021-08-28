@@ -1,4 +1,4 @@
-import { signInAction } from "./actions";
+import { signInAction, signOutAction } from "./actions";
 import { push } from 'connected-react-router';
 import { auth, FirebaseTimestamp, db } from '../../firebase/index'
 
@@ -25,6 +25,23 @@ export const listenAuthState = () => {
         dispatch(push('signin'))
       }
     })
+  }
+}
+
+export const resetPassword = (email) => {
+  return async (dispatch) => {
+    if (email === "") {
+      alert("必須項目が未入力です")
+      return false
+    } else {
+      auth.sendPasswordResetEmail(email)
+        .then(() => {
+          alert('入力されたアドレスにパスワードリセット用のメールを送りました。')
+          dispatch(push('/signin'))
+        }).catch(() => {
+          alert('パスワードリセットに失敗しました。通信環境が悪いようです。')
+        })
+    }
   }
 }
 
@@ -96,6 +113,16 @@ export const signUp = (username, email, password, confirmPassword) => {
               dispatch(push('/'))
             })
         }
+      })
+  }
+}
+
+export const signOut = () => {
+  return async (dispatch) => {
+    auth.signOut()
+      .then(() => {
+        dispatch(signOutAction());
+        dispatch(push('/signin'))
       })
   }
 }
