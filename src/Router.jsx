@@ -3,6 +3,7 @@ import { Switch, Route } from 'react-router';
 import { Home, ProductEdit, Reset, SignUp, SignIn} from './templates';
 import Auth from './Auth';
 
+
 const Router = () =>  {
   return (
     <Switch>
