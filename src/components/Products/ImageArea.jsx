@@ -55,19 +55,17 @@ const ImageArea = (props) => {
           props.images.map(image => <ImagePreview delete={deleteImage} id={image.id} path={image.path} key={image.id} />)
         )}
       </div>
-      <div>
-        <div className="u-text-right">
-          <span>商品画像を登録する</span>
-          <IconButton className={classes.icon}>
-            <label>
-              <AddPhotoAlternateIcon />
-              <input 
-                className="u-display-none" type="file" id="image"
-                onChange={(event) => uploadImage(event)}
-              />
-            </label>
-          </IconButton>
-        </div>
+      <div className="u-text-right">
+        <span>商品画像を登録する</span>
+        <IconButton className={classes.icon}>
+          <label>
+            <AddPhotoAlternateIcon />
+            <input 
+              className="u-display-none" type="file" id="image"
+              onChange={(event) => uploadImage(event)}
+            />
+          </label>
+        </IconButton>
       </div>
     </div>
   )
