@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useCallback, useState} from 'react';
 import TableContainer from '@material-ui/core/TableContainer';
 import Paper from '@material-ui/core/Paper';
 import Table from '@material-ui/core/Table';
@@ -11,10 +11,11 @@ import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit'; 
 import {TextInput} from "../UIkit";
+import {makeStyles} from "@material-ui/styles";
 
 const useStyles = makeStyles({
   cheakIcon: {
-    float: right
+    float: 'right'
   },
   iconCell: {
     height: 48,
@@ -24,6 +25,34 @@ const useStyles = makeStyles({
 
 const SetSizeArea = (props) => {
   const classes = useStyles();
+
+  const [index, setIndex] = useState(0),
+        [size, setSize] = useState(""),
+        [quantity, setQuantity] = useState(0);
+
+  const inputSize = useCallback((event) => {
+    setSize(event.target.value)
+  }, [setSize]);
+
+  const inputQuantity = useCallback((event) => {
+    setQuantity(event.target.value)
+  }, [setQuantity]);
+
+  const addSize = (index, size, quantity) => {
+    if (size === "" || quantity === "") {
+      // Required input is blank
+      return false
+    } else {
+      props.setSizes(prevState => [...prevState, {size: size, quantity: quantity}])
+      setIndex(index + 1)
+      setSize("")
+      setQuantity(0)
+    }
+  };
+
+  const editSize = () => {
+    
+  }
 
   return (
     <div>
@@ -38,8 +67,8 @@ const SetSizeArea = (props) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {props.size.length > 0 && (
-              props.size.map((item, index) => (
+            {props.sizes.length > 0 && (
+              props.sizes.map((item, index) => (
                 <TableRow key={item.size}>
                   <TableCell>{item.size}</TableCell>
                   <TableCell>{item.quantity}</TableCell>
@@ -61,15 +90,15 @@ const SetSizeArea = (props) => {
         <div>
           <TextInput 
             fullWidth={false} label={"サイズ"} multiline={false} required={true} 
-            rows={1} value={}} type={"text"} onChange={}
+            rows={1} value={size} type={"text"} onChange={inputSize}
           />
           <TextInput 
             fullWidth={false} label={"数量"} multiline={false} required={true} 
-            rows={1} value={} type={"number"} onChange={}
+            rows={1} value={quantity} type={"number"} onChange={inputQuantity}
           />
         </div>
-        <IconButton className={classes.cheakIcon}>
-          <CheakCircleIcon />
+        <IconButton className={classes.cheakIcon} onClick={() => addSize(index, size, quantity)}>
+          <CheckCircleIcon />
         </IconButton>
       </TableContainer>
     </div>
