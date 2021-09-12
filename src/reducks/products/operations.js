@@ -6,11 +6,11 @@ const productsRef = db.collection('products')
 
 export const fetchProducts = () => {
   return async (dispatch) => {
-    productsRef.orderBy('update_at', 'desc').get()
+    productsRef.orderBy('updated_at', 'desc').get()
       .then(snapshots => {
         const productList = []
         snapshots.forEach(snapshot => {
-          const product =  snapshot.data();
+          const product = snapshot.data()
           productList.push(product)
         })
         dispatch(fetchProductsAction(productList))
@@ -34,10 +34,10 @@ export const saveProduct = (id, name, description, category, gender, price, imag
     }
 
     if (id === "") {
-      const ref = productsRef.doc();
-      id = ref.id
-      data.id = id
-      data.created = timestamp
+      const ref = productsRef.doc()
+      id = ref.id;
+      data.id = id;
+      data.created = timestamp;
     }
 
     return productsRef.doc(id).set(data, {merge: true})

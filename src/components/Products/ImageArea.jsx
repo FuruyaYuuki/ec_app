@@ -25,7 +25,8 @@ const ImageArea = (props) => {
       props.setImages(newImages);
       return storage.ref('images').child(id).delete()
     }
-  }, [props.images])
+  }, [props])
+  // .images
 
   const uploadImage = useCallback((event) => {
     const file = event.target.files;
@@ -46,7 +47,8 @@ const ImageArea = (props) => {
         props.setImages((prevState => [...prevState, newImage]))
       });
     })
-  }, [props.setImages]);
+  }, [props]);
+  // .setImages
 
   return (
     <div>
