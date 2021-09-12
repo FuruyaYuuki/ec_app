@@ -1,4 +1,4 @@
-import React, {useCallback, useMemo, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import TableContainer from '@material-ui/core/TableContainer';
 import Paper from '@material-ui/core/Paper';
 import Table from '@material-ui/core/Table';
@@ -70,7 +70,7 @@ const SetSizeArea = (props) => {
     props.setSizes(newSizes)
   };
 
-  const memoIndex = useMemo(() => {
+  useEffect(() => {
     setIndex(props.sizes.length)
   }, [props.sizes.length]);
 
